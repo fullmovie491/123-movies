@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for a123movies_crawl project
+# Scrapy settings for tutorial project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,15 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'a123movies_crawl'
+BOT_NAME = 'tutorial'
 
-SPIDER_MODULES = ['a123movies_crawl.spiders']
-NEWSPIDER_MODULE = 'a123movies_crawl.spiders'
+SPIDER_MODULES = ['tutorial.spiders']
+NEWSPIDER_MODULE = 'tutorial.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'a123movies_crawl (+http://www.yourdomain.com)'
+#USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
+
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,13 +48,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'a123movies_crawl.middlewares.A123MoviesCrawlSpiderMiddleware': 543,
+#    'tutorial.middlewares.TutorialSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'a123movies_crawl.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'tutorial.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,7 +66,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'a123movies_crawl.pipelines.A123MoviesCrawlPipeline': 300,
+#    'tutorial.pipelines.TutorialPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
