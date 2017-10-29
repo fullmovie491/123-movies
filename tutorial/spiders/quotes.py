@@ -6,7 +6,7 @@ class ExampleSpider(CrawlSpider):
     name = 'quotes'
     allowed_domains = ['123movies.unblockall.org'] # Which (sub-)domains shall be scraped?
     start_urls = ['http://123movies.unblockall.org/movies-genres/action.html'] # Start with this one
-    rules = [Rule(LinkExtractor(allow=(r'watch'),deny=(r'season')), callback='watch_page')]#,follow=True)] # Follow any link scrapy finds (that is allowed).
+    rules = [Rule(LinkExtractor(allow=(r'watch'),deny=(r'season')), callback='watch_page',follow=True)] # Follow any link scrapy finds (that is allowed).
 
     def watch_page(self,response):
 
@@ -23,7 +23,7 @@ class ExampleSpider(CrawlSpider):
     			'url'  : response.url,
     			'title': response.css('title::text').extract_first(),
     			'movie' : response.css('h3::text').extract_first(),
-    			'server name' : response.css('.server_playing .server_servername').extract_first(),
+    			'server name' : response.css('.server_playing .server_servername::text').extract_first(),
     			'embed_code' : response.css('div#media-player  script::text').extract_first(),
     			'direct_link' : response.css('div#media-player  a::attr(href)').extract_first()
     	}
