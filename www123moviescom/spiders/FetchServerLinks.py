@@ -1,19 +1,21 @@
 import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
+import re
 
-class ExampleSpider(CrawlSpider):
-    name = 'quotes'
+class FetchServerLinksSpider(CrawlSpider):
+    name = 'FetchServerLinks'
     allowed_domains = ['123movies.unblockall.org'] # Which (sub-)domains shall be scraped?
-    start_urls = ['http://123movies.unblockall.org/movies-genres/action.html'] # Start with this one
-    rules = [Rule(LinkExtractor(allow=(r'watch'),deny=(r'season')), callback='watch_page',follow=True)] # Follow any link scrapy finds (that is allowed).
+    start_urls = ['http://123movies.unblockall.org/watch/QG3oA8Go-hack-sign-sub.html'] # Start with this one
+    rules = [Rule(LinkExtractor(allow=(r'\/watch\/'),deny=(r'(season|\/watch\/.+\/|episode)')), callback='watch_page',follow=True)]# Follow any link scrapy finds (that is allowed).
 
     def watch_page(self,response):
-
-       # print('%s' % response.css('title::text').extract_first())
-
-        for server in response.css('.server_play a::attr(href)'):
-        	yield response.follow(server,self.get_server_links)
+    	if not (re.search(r'(season|episode)',response.css('title::text').extract_first(),re.IGNORECASE)):
+    		if not (response.css('#details.section-box')):
+		        for server in response.css('.server_play a::attr(href)').extract():
+		            yield response.follow(server,self.get_server_links)
+            
+               
 
     def get_server_links(self,response):
 
