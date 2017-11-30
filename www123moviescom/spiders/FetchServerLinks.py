@@ -2,7 +2,7 @@ import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 import re
-
+global main_url
 main_url=''
 
 class FetchServerLinksSpider(CrawlSpider):
