@@ -20,7 +20,7 @@ class FetchServerLinksSpider(CrawlSpider):
             
                
 
-    def get_server_links(self,response,main_url):
+    def get_server_links(self,response):
 
 
 
