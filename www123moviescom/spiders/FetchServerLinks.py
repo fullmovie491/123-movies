@@ -5,7 +5,7 @@ import re
 
 class FetchServerLinksSpider(CrawlSpider):
     name = 'FetchServerLinks'
-    main=''
+    main_url=''
     allowed_domains = ['123movies.unblockall.org'] # Which (sub-)domains shall be scraped?
     start_urls = ['http://123movies.unblockall.org/watch/QG3oA8Go-hack-sign-sub.html'] # Start with this one
     rules = [Rule(LinkExtractor(allow=(r'\/watch\/'),deny=(r'(season|\/watch\/.+\/|episode)')), callback='watch_page',follow=True)]# Follow any link scrapy finds (that is allowed).
