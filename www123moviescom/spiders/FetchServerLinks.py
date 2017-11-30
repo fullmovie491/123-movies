@@ -18,7 +18,8 @@ class FetchServerLinksSpider(CrawlSpider):
     	if not (re.search(r'(season|episode)',response.css('title::text').extract_first(),re.IGNORECASE)):
     		if not (response.css('#details.section-box')):
 		        for server in response.css('.server_play a::attr(href)').extract():
-		            yield response.follow(server,self.get_server_links)
+
+		            yield response.follow(server,self.get_server_links(response,main_url))
             
                
 
