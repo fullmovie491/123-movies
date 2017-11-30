@@ -2,7 +2,6 @@ import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 import re
-global main_url
 main_url=''
 
 class FetchServerLinksSpider(CrawlSpider):
@@ -13,8 +12,9 @@ class FetchServerLinksSpider(CrawlSpider):
     rules = [Rule(LinkExtractor(allow=(r'\/watch\/'),deny=(r'(season|\/watch\/.+\/|episode)')), callback='watch_page',follow=True)]# Follow any link scrapy finds (that is allowed).
 
     def watch_page(self,response):
-        print "enter"
+        global main_url
         main_url = response.url
+        print main_url
     	if not (re.search(r'(season|episode)',response.css('title::text').extract_first(),re.IGNORECASE)):
     		if not (response.css('#details.section-box')):
 		        for server in response.css('.server_play a::attr(href)').extract():
@@ -24,8 +24,7 @@ class FetchServerLinksSpider(CrawlSpider):
 
     def get_server_links(self,response):
 
-
-
+        global main_url
     	yield{
                 'main_url' : main_url,
     			'url'  : response.url,
