@@ -10,18 +10,21 @@ class FetchServerLinksSpider(CrawlSpider):
     rules = [Rule(LinkExtractor(allow=(r'\/watch\/'),deny=(r'(season|\/watch\/.+\/|episode)')), callback='watch_page',follow=True)]# Follow any link scrapy finds (that is allowed).
 
     def watch_page(self,response):
+        print "enter"
+        main_url = response.url
     	if not (re.search(r'(season|episode)',response.css('title::text').extract_first(),re.IGNORECASE)):
     		if not (response.css('#details.section-box')):
 		        for server in response.css('.server_play a::attr(href)').extract():
-		            yield response.follow(server,self.get_server_links)
+		            yield response.follow(server,self.get_server_links(main_url))
             
                
 
-    def get_server_links(self,response):
+    def get_server_links(self,response,main_url):
 
 
 
     	yield{
+                'main_url' : main_url,
     			'url'  : response.url,
     			'title': response.css('title::text').extract_first(),
     			'movie' : response.css('h3::text').extract_first(),
