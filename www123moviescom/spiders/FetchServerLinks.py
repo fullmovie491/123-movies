@@ -30,5 +30,14 @@ class FetchServerLinksSpider(CrawlSpider):
     			'movie' : response.css('h3::text').extract_first(),
     			'server name' : response.css('.server_playing .server_servername::text').extract_first(),
     			'embed_code' : response.css('div#media-player  script::text').extract_first(),
-    			'direct_link' : response.css('div#media-player  a::attr(href)').extract_first()
+    			'direct_link' : response.css('div#media-player  a::attr(href)').extract_first(),
+                'image_url' : response.css('div#thumb mvic-thumb::attr(style)').extract_first(),
+                'desc' : response.css('#mv-info .desc::text').extract_first(), 
+                'genre': response.css('.mvici-left p:nth-child(1) a::text').extract_first(),
+                'country' : response.css('.mvici-left p:nth-child(4) a::text').extract_first(),
+                'director' : response.css('.mvici-left p:nth-child(3) a::text').extract_first(),
+                'actor' : response.css('.mvici-left p:nth-child(2) a::text').extract_first(),
+                'year' : response.css('.mvici-right p:nth-child(4)::text').extract_first(),
+                'duration' : response.css('.mvici-right p:nth-child(3)::text').extract_first(),
+                'company' : response.css('.mvici-right p:nth-child(2)::text').extract_first()
     	}
