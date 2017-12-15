@@ -31,7 +31,7 @@ class FetchServerLinksSpider(CrawlSpider):
     			'server name' : response.css('.server_playing .server_servername::text').extract_first(),
     			'embed_code' : response.css('div#media-player  script::text').extract_first(),
     			'direct_link' : response.css('div#media-player  a::attr(href)').extract_first(),
-                'image_url' : response.css('div#mvic-thumb::attr(style)').extract_first(),
+                'image_url' : response.css('div .mvic-thumb::attr(style)').extract_first(),
                 'desc' : response.css('#mv-info .desc::text').extract_first(), 
                 'genre': response.css('.mvici-left p:nth-child(1) a::text').extract_first(),
                 'country' : response.css('.mvici-left p:nth-child(4) a::text').extract_first(),
